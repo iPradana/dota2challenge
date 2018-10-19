@@ -14,30 +14,44 @@ import org.w3c.dom.Text;
 
 public class HeroesActivity extends AppCompatActivity {
 
+    image_list imageList = new image_list();
+    Button btnHero;
+    LinearLayout L2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_heroes);
 
         LinearLayout linearLayout = findViewById(R.id.h1);
-        LinearLayout L2 = new LinearLayout(this);
-        L2.setOrientation(LinearLayout.HORIZONTAL);
-        L2.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT));
 
         // Create Button Dynamically
-        Button btnShow = new Button(this);
+        /*Button btnShow = new Button(this);
         Button btnShow2 = new Button(this);
         btnShow.setBackgroundResource(R.drawable.hero1);
         btnShow2.setBackgroundResource(R.drawable.hero2);
         btnShow.setLayoutParams(new LinearLayout.LayoutParams(500, LinearLayout.LayoutParams.WRAP_CONTENT));
         btnShow2.setLayoutParams(new LinearLayout.LayoutParams(600, LinearLayout.LayoutParams.WRAP_CONTENT));
+        */
 
+        for(int i=0;i<116;i++){
+            L2 = new LinearLayout(this);
+            L2.setOrientation(LinearLayout.HORIZONTAL);
+            L2.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT));
 
-        // Add Button to LinearLayout
-        if (linearLayout != null) {
-            //linearLayout.addView(L2);
-            linearLayout.addView(btnShow);
-            linearLayout.addView(btnShow2);
+            linearLayout.addView(L2);
+            for(int z=0;z<2;z++){
+                btnHero = new Button(this);
+                btnHero.setBackgroundResource(imageList.getList(i));
+                //btnHero.setLayoutParams(new LinearLayout.LayoutParams(400, 300));
+                LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(500,300);
+                p.setMargins(20,20,20,20);
+                btnHero.setLayoutParams(p);
+
+                L2.addView(btnHero);
+                i++;
+            }
+            i--;
         }
 
 /*
