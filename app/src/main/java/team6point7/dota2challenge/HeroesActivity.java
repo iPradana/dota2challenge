@@ -7,7 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class HeroesActivity extends AppCompatActivity {
 
@@ -17,18 +20,22 @@ public class HeroesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_heroes);
 
         LinearLayout linearLayout = findViewById(R.id.h1);
+        LinearLayout L2 = new LinearLayout(this);
+        L2.setOrientation(LinearLayout.HORIZONTAL);
+        L2.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT));
 
         // Create Button Dynamically
         Button btnShow = new Button(this);
         Button btnShow2 = new Button(this);
-        btnShow.setText("123");
-        btnShow2.setText("123");
-        btnShow.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        btnShow2.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        btnShow.setBackgroundResource(R.drawable.hero1);
+        btnShow2.setBackgroundResource(R.drawable.hero2);
+        btnShow.setLayoutParams(new LinearLayout.LayoutParams(500, LinearLayout.LayoutParams.WRAP_CONTENT));
+        btnShow2.setLayoutParams(new LinearLayout.LayoutParams(600, LinearLayout.LayoutParams.WRAP_CONTENT));
 
 
         // Add Button to LinearLayout
         if (linearLayout != null) {
+            //linearLayout.addView(L2);
             linearLayout.addView(btnShow);
             linearLayout.addView(btnShow2);
         }
