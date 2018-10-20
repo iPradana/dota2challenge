@@ -1,5 +1,6 @@
 package team6point7.dota2challenge;
 
+import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -60,5 +61,10 @@ public class HeroesActivity extends AppCompatActivity {
         ConstraintLayout L1 = (ConstraintLayout) findViewById(R.id.herolayout);
         ConstraintLayout.LayoutParams Lp = new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.MATCH_PARENT);
         L1.addView(btn,Lp);*/
+    }
+
+    public void selectHero(View view){
+        Intent i = new Intent(this, Hero2Activity.class);
+        
     }
 }
