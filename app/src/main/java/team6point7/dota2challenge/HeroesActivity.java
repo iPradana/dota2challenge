@@ -44,6 +44,7 @@ public class HeroesActivity extends AppCompatActivity {
             for(int z=0;z<2;z++){
                 btnHero = new Button(this);
                 btnHero.setBackgroundResource(imageList.getList(i));
+                btnHero.setId(i);
                 //btnHero.setLayoutParams(new LinearLayout.LayoutParams(400, 300));
                 LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(500,300);
                 p.setMargins(20,20,20,20);
@@ -65,6 +66,8 @@ public class HeroesActivity extends AppCompatActivity {
 
     public void selectHero(View view){
         Intent i = new Intent(this, Hero2Activity.class);
-        
+        int x = view.getId();
+        i.putExtra("idnya",x);
+        startActivity(i);
     }
 }

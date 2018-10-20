@@ -7,7 +7,7 @@
     tools:context=".Hero2Activity">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imgHero"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -26,7 +26,7 @@
         android:layout_marginTop="16dp"
         android:text="Button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imgHero" />
 
     <Button
         android:id="@+id/btnC"
@@ -36,7 +36,7 @@
         android:layout_marginEnd="32dp"
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imgHero" />
 
     <Button
         android:id="@+id/btnB"
