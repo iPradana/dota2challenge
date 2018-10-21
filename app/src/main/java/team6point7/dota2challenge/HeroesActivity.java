@@ -49,6 +49,11 @@ public class HeroesActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(500,300);
                 p.setMargins(20,20,20,20);
                 btnHero.setLayoutParams(p);
+                btnHero.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        selectHero(v);
+                   }
+                });
 
                 L2.addView(btnHero);
                 i++;
