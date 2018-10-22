@@ -5,8 +5,12 @@ import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Arrays;
 
 public class Hero2Activity extends AppCompatActivity {
 
@@ -14,6 +18,10 @@ public class Hero2Activity extends AppCompatActivity {
     image_list imageList = new image_list();
     Bundle extras;
     int idnya;
+    Button btnA, btnB, btnC, btnD, btnHide;
+    opsi_hero oh = new opsi_hero();
+    String answer;
+    TextView tvHint, tv50, tvAnswer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +32,23 @@ public class Hero2Activity extends AppCompatActivity {
         extras = getIntent().getExtras();
         idnya = extras.getInt("idnya");
         img.setImageResource(imageList.getList(idnya));
+
+        btnA = (Button) findViewById(R.id.btnA);
+        btnB = (Button) findViewById(R.id.btnB);
+        btnC = (Button) findViewById(R.id.btnC);
+        btnD = (Button) findViewById(R.id.btnD);
+
+        tvHint = (TextView) findViewById(R.id.txtHint);
+        tv50 = (TextView) findViewById(R.id.txt50);
+        tvAnswer = (TextView) findViewById(R.id.txtAnswer);
+
+        btnA.setText(oh.getA(idnya));
+        btnB.setText(oh.getB(idnya));
+        btnC.setText(oh.getC(idnya));
+        btnD.setText(oh.getD(idnya));
+        answer = oh.getX(idnya);
+
+        tvAnswer.setText(answer);
     }
 
     public void btnNext(View view){
@@ -31,7 +56,8 @@ public class Hero2Activity extends AppCompatActivity {
             Toast.makeText(this,"This is the last hero",Toast.LENGTH_LONG).show();
         }else{
             Intent i = new Intent(this, Hero2Activity.class);
-            int x = view.getId();
+            int x = idnya;
+            x++;
             i.putExtra("idnya",x);
             startActivity(i);
             finish();
@@ -43,11 +69,16 @@ public class Hero2Activity extends AppCompatActivity {
             Toast.makeText(this,"This is the first hero",Toast.LENGTH_LONG).show();
         }else{
             Intent i = new Intent(this, Hero2Activity.class);
-            int x = view.getId();
-            x++;
+            int x = idnya;
+            x--;
             i.putExtra("idnya",x);
             startActivity(i);
             finish();
         }
+    }
+
+    public void hideThis(View view){
+        btnHide = (Button) findViewById(view.getId());
+        btnHide.setVisibility(View.INVISIBLE);
     }
 }
