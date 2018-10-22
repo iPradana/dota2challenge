@@ -48,6 +48,10 @@ public class Hero2Activity extends AppCompatActivity {
         btnD.setText(oh.getD(idnya));
         answer = oh.getX(idnya);
 
+        tvHint.setVisibility(View.INVISIBLE);
+        tv50.setVisibility(View.INVISIBLE);
+        tvAnswer.setVisibility(View.INVISIBLE);
+
         tvAnswer.setText(answer);
     }
 
@@ -77,8 +81,19 @@ public class Hero2Activity extends AppCompatActivity {
         }
     }
 
-    public void hideThis(View view){
+    public void hide1(View view){
         btnHide = (Button) findViewById(view.getId());
         btnHide.setVisibility(View.INVISIBLE);
+        tvHint.setVisibility(View.VISIBLE);
+    }
+    public void hide2(View view){
+        btnHide = (Button) findViewById(view.getId());
+        btnHide.setVisibility(View.INVISIBLE);
+        tv50.setVisibility(View.VISIBLE);
+    }
+    public void hide3(View view){
+        btnHide = (Button) findViewById(view.getId());
+        btnHide.setVisibility(View.INVISIBLE);
+        tvAnswer.setVisibility(View.VISIBLE);
     }
 }

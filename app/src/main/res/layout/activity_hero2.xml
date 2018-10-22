@@ -141,24 +141,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:onClick="btnNext"
         android:text="Next"
+        app:layout_constraintBottom_toTopOf="@+id/btnC"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toEndOf="@+id/imgHero"
-        tools:layout_editor_absoluteY="55dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnPrevious"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:onClick="btnPrevious"
         android:text="Previous"
+        app:layout_constraintBottom_toTopOf="@+id/btnA"
         app:layout_constraintEnd_toStartOf="@+id/imgHero"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="55dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
