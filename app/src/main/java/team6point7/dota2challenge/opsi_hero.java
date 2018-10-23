@@ -1,11 +1,9 @@
 package team6point7.dota2challenge;
 
 public class opsi_hero {
-    String[][] oph;
+    public static String[][] oph = new String[116][5];
 
     public opsi_hero(){
-        oph = new String[116][5];
-
         oph[0][0]="Abaddon";
         oph[0][1]="Horseman";
         oph[0][2]="Darksider";
@@ -146,6 +144,8 @@ public class opsi_hero {
                 {"","","","",""}
         };*/
     }
+
+    public void setHero(int A){oph[0][0]="abba";}
 
     public String getA(int A){
         return oph[A][0];
