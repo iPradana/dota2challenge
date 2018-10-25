@@ -2,6 +2,7 @@ package team6point7.dota2challenge;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,9 +17,9 @@ public class Hero2Activity extends AppCompatActivity {
     image_list imageList = new image_list();
     Bundle extras;
     int idnya;
-    Button btnA, btnB, btnC, btnD, btnHide;
+    Button btnA, btnB, btnC, btnD, btnHint, btnHide, btnAnswer;
     opsi_hero oh = new opsi_hero();
-    String answer;
+    String answerx, answer;
     TextView tvHint, tv50, tvAnswer;
     DatabaseHelper myDb;
     String koin,idkoin;
@@ -58,7 +59,7 @@ public class Hero2Activity extends AppCompatActivity {
         tv50 = (TextView) findViewById(R.id.txt50);
         tvAnswer = (TextView) findViewById(R.id.txtAnswer);
 
-        btnA.setText(koin);
+        btnA.setText(oh.getA(idnya));
         btnB.setText(oh.getB(idnya));
         btnC.setText(oh.getC(idnya));
         btnD.setText(oh.getD(idnya));
@@ -68,6 +69,7 @@ public class Hero2Activity extends AppCompatActivity {
         tv50.setVisibility(View.INVISIBLE);
         tvAnswer.setVisibility(View.INVISIBLE);
 
+        btnHint = (Button) findViewById(R.id.btnHint);
         tvAnswer.setText(answer);
     }
 
@@ -97,6 +99,27 @@ public class Hero2Activity extends AppCompatActivity {
         }
     }
 
+    public void tryAnswer(View view){
+        koin2 = Integer.parseInt(koin);
+        if(koin2<21){
+            Toast.makeText(this,"You need more coins to answer (20 coins to answer)",Toast.LENGTH_LONG).show();
+        }else{
+            btnAnswer = (Button) findViewById(view.getId());
+            answerx = btnAnswer.getText().toString();
+            if(answer.equalsIgnoreCase(answerx)){
+                btnAnswer.setBackgroundColor(Color.GREEN);
+                koin2=koin2+10;
+            }else{
+                btnAnswer.setBackgroundColor(Color.RED);
+                koin2=koin2-20;
+            }
+            koin = Integer.toString(koin2);
+            myDb.updateData1(idkoin,koin);
+
+            btnHint.setText(koin);
+        }
+    }
+
     public void setHero(View view){
         Cursor res = myDb.getDataKoin();
         if(res.getCount() == 0){
@@ -115,7 +138,7 @@ public class Hero2Activity extends AppCompatActivity {
         koin = Integer.toString(koin2);
         myDb.updateData1(idkoin,koin);
 
-        btnA.setText(koin);
+        tvHint.setText(koin);
     }
 
     public void hide1(View view){
