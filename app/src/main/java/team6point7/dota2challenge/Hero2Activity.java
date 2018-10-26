@@ -20,10 +20,12 @@ public class Hero2Activity extends AppCompatActivity {
     Button btnA, btnB, btnC, btnD, btnHint, btnHide, btnAnswer;
     opsi_hero oh = new opsi_hero();
     String answerx, answer;
+    String AA, AB, AC, AD;
     TextView tvHint, tv50, tvAnswer;
     DatabaseHelper myDb;
     String koin,idkoin;
     int koin2;
+    String idpress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,7 @@ public class Hero2Activity extends AppCompatActivity {
 
         btnA = (Button) findViewById(R.id.btnA);
         btnB = (Button) findViewById(R.id.btnB);
-        btnC = (Button) findViewById(R.id.btnCoin);
+        btnC = (Button) findViewById(R.id.btnC);
         btnD = (Button) findViewById(R.id.btnD);
 
         tvHint = (TextView) findViewById(R.id.txtHint);
@@ -64,6 +66,52 @@ public class Hero2Activity extends AppCompatActivity {
         btnC.setText(oh.getC(idnya));
         btnD.setText(oh.getD(idnya));
         answer = oh.getX(idnya);
+
+        res = myDb.getDataHero(idnya);
+        if(res.getCount() == 0){
+            //showMessage("ERROR", "NOTHING FOUND");
+            Toast.makeText(this, "Application Error", Toast.LENGTH_LONG).show();
+            return;
+        }
+        buffer = new StringBuffer();
+        while (res.moveToNext()){
+            switch(res.getString(1)){
+                case "0": break;
+                case "1": btnA.setBackgroundColor(Color.RED); btnA.setEnabled(false); break;
+                case "2": btnA.setBackgroundColor(Color.GREEN);
+                            btnA.setEnabled(false);
+                            btnB.setEnabled(false);
+                            btnC.setEnabled(false);
+                            btnD.setEnabled(false); break;
+            }
+            switch(res.getString(2)){
+                case "0": break;
+                case "1": btnB.setBackgroundColor(Color.RED); btnB.setEnabled(false); break;
+                case "2": btnB.setBackgroundColor(Color.GREEN);
+                    btnA.setEnabled(false);
+                    btnB.setEnabled(false);
+                    btnC.setEnabled(false);
+                    btnD.setEnabled(false); break;
+            }
+            switch(res.getString(3)){
+                case "0": break;
+                case "1": btnC.setBackgroundColor(Color.RED); btnC.setEnabled(false); break;
+                case "2": btnC.setBackgroundColor(Color.GREEN);
+                    btnA.setEnabled(false);
+                    btnB.setEnabled(false);
+                    btnC.setEnabled(false);
+                    btnD.setEnabled(false); break;
+            }
+            switch(res.getString(4)){
+                case "0": break;
+                case "1": btnD.setBackgroundColor(Color.RED); btnD.setEnabled(false); break;
+                case "2": btnD.setBackgroundColor(Color.GREEN);
+                    btnA.setEnabled(false);
+                    btnB.setEnabled(false);
+                    btnC.setEnabled(false);
+                    btnD.setEnabled(false); break;
+            }
+        }
 
         tvHint.setVisibility(View.INVISIBLE);
         tv50.setVisibility(View.INVISIBLE);
@@ -101,16 +149,30 @@ public class Hero2Activity extends AppCompatActivity {
 
     public void tryAnswer(View view){
         koin2 = Integer.parseInt(koin);
-        if(koin2<21){
+        if(koin2<20){
             Toast.makeText(this,"You need more coins to answer (20 coins to answer)",Toast.LENGTH_LONG).show();
         }else{
             btnAnswer = (Button) findViewById(view.getId());
             answerx = btnAnswer.getText().toString();
+            switch(view.getId()){
+                case R.id.btnA : idpress="NAME1"; break;
+                case R.id.btnB : idpress="NAME2"; break;
+                case R.id.btnC : idpress="NAME3"; break;
+                case R.id.btnD : idpress="NAME4"; break;
+            }
+
             if(answer.equalsIgnoreCase(answerx)){
                 btnAnswer.setBackgroundColor(Color.GREEN);
                 koin2=koin2+10;
+                myDb.updateData2(Integer.toString(idnya),idpress,"2");
+                btnA.setEnabled(false);
+                btnB.setEnabled(false);
+                btnC.setEnabled(false);
+                btnD.setEnabled(false);
             }else{
                 btnAnswer.setBackgroundColor(Color.RED);
+                btnAnswer.setEnabled(false);
+                myDb.updateData2(Integer.toString(idnya),idpress,"1");
                 koin2=koin2-20;
             }
             koin = Integer.toString(koin2);

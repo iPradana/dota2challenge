@@ -13,15 +13,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_NAME2 = "hero";
     public static final String COL_1 = "ID1";
     public static final String COL_2 = "NAME1";
-    public static final String COL_3 = "ID2";
-    public static final String COL_4 = "NAME2";
 
     public  DatabaseHelper(Context context){super(context, DATABASE_NAME,null,1);}
 
     @Override
     public void onCreate(SQLiteDatabase db){
         db.execSQL("create table " + TABLE_NAME1 + "(ID1 INTEGER PRIMARY KEY AUTOINCREMENT, NAME1 TEXT, MARKS INTEGER)");
-        db.execSQL("create table " + TABLE_NAME2 + "(ID2 INTEGER PRIMARY KEY AUTOINCREMENT, NAME2 TEXT, MARKS INTEGER)");
+        db.execSQL("create table " + TABLE_NAME2 + "(ID2 INTEGER PRIMARY KEY, NAME1 TEXT, NAME2 TEXT, NAME3 TEXT, NAME4 TEXT, MARKS INTEGER)");
     }
 
     @Override
@@ -43,10 +41,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public boolean insertData2(String Name){
+    public boolean insertData2(int Name){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_4, Name);
+        contentValues.put("ID2", Name);
+        contentValues.put("NAME1", "0");
+        contentValues.put("NAME2", "0");
+        contentValues.put("NAME3", "0");
+        contentValues.put("NAME4", "0");
         long result = db.insert(TABLE_NAME2, null, contentValues);
         if(result == -1){
             return false;
@@ -68,12 +70,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public boolean updateData2(String id, String Name){
+    public boolean updateData2(String id, String Name, String val){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_3,id);
-        contentValues.put(COL_4,Name);
-        long result = db.update(TABLE_NAME2, contentValues, "ID2 = ?",new String[] { id });
+        contentValues.put("ID2",id);
+        contentValues.put(Name,val);
+        long result = db.update(TABLE_NAME2, contentValues,"ID2 = ?",new String[] { id });
         if(result == -1){
             return false;
         }else{
@@ -97,9 +99,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public Cursor getDataDosen(){
+    public Cursor getDataHero1(){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select * from "+TABLE_NAME2, null);
+        return res;
+    }
+
+    public Cursor getDataHero(int idne){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from "+TABLE_NAME2+" WHERE ID2 = '"+idne+"'", null);
         return res;
     }
 }

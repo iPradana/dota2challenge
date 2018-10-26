@@ -1,9 +1,6 @@
 package team6point7.dota2challenge;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         if(res.getCount() == 0){
             //showMessage("ERROR", "NOTHING FOUND");
             myDb.insertData1("100");
+            resethero();
             Toast.makeText(MainActivity.this, "Current Coins 100", Toast.LENGTH_LONG).show();
             return;
         }
@@ -37,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             koin = res.getString(1);
         }
 
-        btnK = (Button) findViewById(R.id.btnCoin);
+        btnK = (Button) findViewById(R.id.btnC);
         btnK.setText(koin);
         //showMessage("Data Mahasiswa",buffer.toString());
     }
@@ -45,5 +43,14 @@ public class MainActivity extends AppCompatActivity {
     public void btnPlay(View view){
         Intent i = new Intent(this,PlayActivity.class);
         startActivity(i);
+    }
+
+    public void resethero(){
+        Cursor rs =myDb.getDataHero1();
+        if(rs.getCount() == 0){
+            for(int abc=0; abc<116; abc++){
+                myDb.insertData2(abc);
+            }
+        }
     }
 }
