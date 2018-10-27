@@ -57,9 +57,7 @@ public class Hero2Activity extends AppCompatActivity {
         btnC = (Button) findViewById(R.id.btnC);
         btnD = (Button) findViewById(R.id.btnD);
 
-        tvHint = (TextView) findViewById(R.id.txtHint);
-        tv50 = (TextView) findViewById(R.id.txt50);
-        tvAnswer = (TextView) findViewById(R.id.txtAnswer);
+        btnAnswer = (Button) findViewById(R.id.btnAnswer);
 
         btnA.setText(oh.getA(idnya));
         btnB.setText(oh.getB(idnya));
@@ -111,14 +109,14 @@ public class Hero2Activity extends AppCompatActivity {
                     btnC.setEnabled(false);
                     btnD.setEnabled(false); break;
             }
+            switch(res.getString(5)){
+                case "0": break;
+                case "1": btnAnswer.setText(answer); btnAnswer.setEnabled(false); break;
+            }
         }
 
-        tvHint.setVisibility(View.INVISIBLE);
-        tv50.setVisibility(View.INVISIBLE);
-        tvAnswer.setVisibility(View.INVISIBLE);
-
         btnHint = (Button) findViewById(R.id.btnHint);
-        tvAnswer.setText(answer);
+        btnHint.setText(koin);
     }
 
     public void btnNext(View view){
@@ -200,22 +198,20 @@ public class Hero2Activity extends AppCompatActivity {
         koin = Integer.toString(koin2);
         myDb.updateData1(idkoin,koin);
 
-        tvHint.setText(koin);
     }
 
     public void hide1(View view){
-        btnHide = (Button) findViewById(view.getId());
-        btnHide.setVisibility(View.INVISIBLE);
-        tvHint.setVisibility(View.VISIBLE);
-    }
-    public void hide2(View view){
-        btnHide = (Button) findViewById(view.getId());
-        btnHide.setVisibility(View.INVISIBLE);
-        tv50.setVisibility(View.VISIBLE);
-    }
-    public void hide3(View view){
-        btnHide = (Button) findViewById(view.getId());
-        btnHide.setVisibility(View.INVISIBLE);
-        tvAnswer.setVisibility(View.VISIBLE);
+        koin2 = Integer.parseInt(koin);
+        if(koin2<50){
+            Toast.makeText(this,"you need at least 50 coins to open",Toast.LENGTH_LONG).show();
+        }else{
+            btnAnswer = (Button) findViewById(view.getId());
+            btnAnswer.setText(answer);
+
+            koin2=koin2-50;
+            koin=Integer.toString(koin2);
+            myDb.updateData1(idkoin,koin);
+            myDb.updateData2(Integer.toString(idnya),"NAME5","1");
+        }
     }
 }
